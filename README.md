@@ -11,7 +11,7 @@ Explore React's core concepts, hands-on examples, and best practices to kickstar
  - [Rendering lists](#rendering-lists)
  - [Responding to events](#responding-to-events)
 
-- **[`export`](#export)**__,__**[`map`](#map)**__,__**[`for`](#map)**__,__**[`event handler`](#event-handler)**__,__
+- **[`export`](#export)**__,__**[`map`](#map)**__,__**[`for`](#map)**__,__
 - React Hooks: **[`useState`](#usestate)**
 
 
@@ -182,7 +182,7 @@ export default function ShoppingList() {
 ```
 
 ## Responding to events
-You can respond to events by declaring `event handler` functions inside your components:<div id="event-handler"/>
+You can respond to events by declaring `event handler` functions inside your components:
 ```jsx
 function MyButton() {
   function handleClick() {
