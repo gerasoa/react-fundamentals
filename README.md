@@ -10,7 +10,7 @@ Explore React's core concepts, hands-on examples, and best practices to kickstar
  - [Conditional rendering](#conditional-rendering)
  - [Rendering lists](#rendering-lists)
 
-- [`export`](#export)
+- [`export`](#export), [`map`](#map)
 
 
 ## export
@@ -140,7 +140,7 @@ const products = [
 ];
 ```
 
-Use `map` function to transform an array of products into an array of `<li>` items.
+Use `map` function to transform an array of products into an array of `<li>` items.<div id="map"/>
 
 ```jsx
 const listItems = products.map(product =>
