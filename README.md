@@ -9,8 +9,10 @@ Explore React's core concepts, hands-on examples, and best practices to kickstar
  - [Displaying data](#displaying-data)
  - [Conditional rendering](#conditional-rendering)
  - [Rendering lists](#rendering-lists)
+ - [Responding to events](#responding-to-events)
 
-- **[`export`](#export)**__,__**[`map`](#map)**__,__**[`for`](#map)**__,__
+- **[`export`](#export)**__,__**[`map`](#map)**__,__**[`for`](#map)**__,__**[`event handler`](#event-handler)**__,__
+- React Hooks: **[`useState`](#usestate)**
 
 
 ## export
@@ -152,4 +154,110 @@ const listItems = products.map(product =>
 return (
   <ul>{listItems}</ul>
 );
+```
+For each item in a list, you should pass a string or a number that uniquely identifies that item among its siblings. 
+```jsx
+const products = [
+  { title: 'Cabbage', isFruit: false, id: 1 },
+  { title: 'Garlic', isFruit: false, id: 2 },
+  { title: 'Apple', isFruit: true, id: 3 },
+];
+
+export default function ShoppingList() {
+  const listItems = products.map(product =>
+    <li
+      key={product.id}
+      style={{
+        color: product.isFruit ? 'magenta' : 'darkgreen'
+      }}
+    >
+      {product.title}
+    </li>
+  );
+
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+```
+
+## Responding to events
+You can respond to events by declaring `event handler` functions inside your components:<div id="event-handler"/>
+```jsx
+function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click me
+    </button>
+  );
+}
+```
+
+> [!NOTE]  
+> Note that in onClick={handleClick}, there are no parentheses at the end. Avoid calling the event handler function; simply pass it down. React will automatically invoke the event handler when the user clicks the button.
+
+## useState
+This hook allows you to add state to a functional component. It returns a pair of values: the current state and a function to update it.
+Import useState from React:
+```jsx
+import { useState } from 'react';
+```
+Now you can declare a state variable inside your component:
+```jsx
+function MyButton() {
+  const [count, setCount] = useState(0);
+  // ...
+```
+- `count`: represents the current state value
+- `setCount`: is a function to update the state
+- `useState(0)`:  is used to manage state within a functional component, In this case, it initializes a piece of state named count with an initial value of 0.
+
+When you want to change state, call setCount() and pass the new value to it. Clicking this button will increment the counter:
+```jsx
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+```
+React will call your component function again. This time, count will be 1. Then it will be 2. And so on.
+```jsx
+import { useState } from 'react';
+
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Counters that update separately</h1>
+      <MyButton />
+      <MyButton />
+    </div>
+  );
+}
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+
 ```
