@@ -10,7 +10,7 @@ Explore React's core concepts, hands-on examples, and best practices to kickstar
  - [Conditional rendering](#conditional-rendering)
  - [Rendering lists](#rendering-lists)
 
-- [`export`](#export), [`map`](#map)
+- **[`export`](#export)**__,__**[`map`](#map)**__,__**[`for`](#map)**__,__
 
 
 ## export
