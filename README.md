@@ -202,6 +202,7 @@ function MyButton() {
 
 ## useState
 This hook allows you to add state to a functional component. It returns a pair of values: the current state and a function to update it.
+
 Import useState from React:
 ```jsx
 import { useState } from 'react';
@@ -233,31 +234,8 @@ function MyButton() {
 }
 ```
 React will call your component function again. This time, count will be 1. Then it will be 2. And so on.
-```jsx
-import { useState } from 'react';
 
-export default function MyApp() {
-  return (
-    <div>
-      <h1>Counters that update separately</h1>
-      <MyButton />
-      <MyButton />
-    </div>
-  );
-}
+>[!NOTE]  
+>Each button “remembers” its own count state and doesn’t affect other buttons.
 
-function MyButton() {
-  const [count, setCount] = useState(0);
 
-  function handleClick() {
-    setCount(count + 1);
-  }
-
-  return (
-    <button onClick={handleClick}>
-      Clicked {count} times
-    </button>
-  );
-}
-
-```
