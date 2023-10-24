@@ -3,9 +3,14 @@ Explore React's core concepts, hands-on examples, and best practices to kickstar
 
 
 # Contents
- - [`export`](#export)
- - [`JSX`](#jsx)
+ 
+ - [JSX](#jsx)
  - [Adding styles](#adding-styles)
+ - [Displaying data](#displaying-data)
+ - [Conditional rendering](#conditional-rendering)
+ - [Rendering lists](#rendering-lists)
+
+- [`export`](#export)
 
 
 ## export
@@ -49,3 +54,102 @@ React does not prescribe how you add CSS files. In the simplest case, you’ll a
 <link href="/media/examples/link-element-example.css" rel="stylesheet" />
 ```
 
+## Displaying data
+JSX enables you to integrate markup within JavaScript. Using curly braces, you can seamlessly switch back to JavaScript to incorporate variables from your code and present them to users. For instance, this code will render user.name:
+```javascript
+return (
+  <h1>
+    {user.name}
+  </h1>
+);
+```
+You can switch to JavaScript within JSX attributes using curly braces instead of quotes. For instance, className="avatar" assigns the string "avatar" as the CSS class, while src={user.imageUrl} takes the JavaScript variable user.imageUrl and uses its value as the src attribute.
+```javascript
+return (
+  <img
+    className="avatar"
+    src={user.imageUrl}
+  />
+);
+```
+You can put more complex expressions inside the JSX curly braces too, for example, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
+```javascript
+const user = {
+  name: 'Hedy Lamarr',
+  imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
+  imageSize: 90,
+};
+
+export default function Profile() {
+  return (
+    <>
+      <h1>{user.name}</h1>
+      <img
+        className="avatar"
+        src={user.imageUrl}
+        alt={'Photo of ' + user.name}
+        style={{
+          width: user.imageSize,
+          height: user.imageSize
+        }}
+      />
+    </>
+  );
+}
+```
+
+## Conditional rendering
+You can use the same techniques as you use when writing regular JavaScript code.
+```jsx
+let content;
+if (isLoggedIn) {
+  content = <AdminPanel />;
+} else {
+  content = <LoginForm />;
+}
+return (
+  <div>
+    {content}
+  </div>
+);
+```
+For shorter code, you can use the ? [operator for conditionals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator). It works within JSX, unlike `if`.
+```jsx
+<div>
+  {isLoggedIn ? (
+    <AdminPanel />
+  ) : (
+    <LoginForm />
+  )}
+</div>
+```
+When you don’t need the `else` branch, you can also use a shorter [logical && syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
+```jsx
+<div>
+  {isLoggedIn && <AdminPanel />}
+</div>
+```
+## Rendering lists
+You can use JavaScript features like [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) and the [array `map` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) to render lists of compenents.
+
+```jsx
+const products = [
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
+];
+```
+
+Use `map` function to transform an array of products into an array of `<li>` items.
+
+```jsx
+const listItems = products.map(product =>
+  <li key={product.id}>
+    {product.title}
+  </li>
+);
+
+return (
+  <ul>{listItems}</ul>
+);
+```
